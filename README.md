@@ -24,9 +24,19 @@ curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-langlinks.sql.gz
 curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-md5sums.txt  
 # ページ情報
 curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-page.sql.gz  
+# ページリンク情報
+curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pagelinks.sql.gz  
 # ページのプロパティ
 curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-page_props.sql.gz  
 # ページの保護情報
 curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-page_restrictions.sql.gz  
 # ページ間のリンク情報
 curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pagelinks.sql.gz  
+
+
+# import mysql
+mysql> create database jawikipedia;
+
+$ mysql -u root jawikipedia < jawiki-latest-page.sql
+$ mysql -u root jawikipedia < jawiki-latest-pagelinks.sql
+$ mysql -u root jawikipedia < jawiki-latest-categorylinks.sql
