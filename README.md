@@ -17,6 +17,60 @@ $ make
 $ sudo make install  
 
 cat jawiki-latest-pages-articles.xml | sed -e 's/<dbname>.*<\/dbname>//' -e 's/<ns>.*<\/ns>//' -e 's/<parentid>.*<\/parentid>//' -e 's/<sha1>.*<\/sha1>//' -e 's/<model>.*<\/model>//' -e 's/<format>.*<\/format>//' -e 's/<redirect>.*<\/redirect>//' -e 's/<redirect.*\/>//' | xml2sql
+ 
+ CREATE TABLE page (
+  page_id int unsigned NOT NULL auto_increment,
+  page_namespace int NOT NULL,
+  page_title varchar(255) binary NOT NULL,
+  page_restrictions tinyblob NOT NULL,
+  page_counter bigint unsigned NOT NULL default '0',
+  page_is_redirect tinyint unsigned NOT NULL default '0',
+  page_is_new tinyint unsigned NOT NULL default '0',
+  page_random real unsigned NOT NULL,
+  page_touched binary(14) NOT NULL default '',
+  page_latest int unsigned NOT NULL,
+  page_len int unsigned NOT NULL,
+
+  PRIMARY KEY page_id (page_id),
+  UNIQUE INDEX name_title (page_namespace,page_title),
+  
+  -- Special-purpose indexes
+  INDEX (page_random),
+  INDEX (page_len)
+);
+
+CREATE TABLE revision (
+  rev_id int unsigned NOT NULL auto_increment,
+  rev_page int unsigned NOT NULL,
+  rev_text_id int unsigned NOT NULL,
+  rev_comment tinyblob NOT NULL,
+  rev_user int unsigned NOT NULL default '0',
+  rev_user_text varchar(255) binary NOT NULL default '',
+  rev_timestamp binary(14) NOT NULL default '',
+  rev_minor_edit tinyint unsigned NOT NULL default '0',
+  rev_deleted tinyint unsigned NOT NULL default '0',
+  rev_len int unsigned,
+  rev_parent_id int unsigned default NULL,
+
+  PRIMARY KEY rev_page_id (rev_page, rev_id),
+  UNIQUE INDEX rev_id (rev_id),
+  INDEX rev_timestamp (rev_timestamp),
+  INDEX page_timestamp (rev_page,rev_timestamp),
+  INDEX user_timestamp (rev_user,rev_timestamp),
+  INDEX usertext_timestamp (rev_user_text,rev_timestamp)
+
+)  MAX_ROWS=10000000 AVG_ROW_LENGTH=1024;
+
+CREATE TABLE text (
+  old_id int unsigned NOT NULL auto_increment,
+  old_text mediumblob NOT NULL,
+  old_flags tinyblob NOT NULL,
+  
+  PRIMARY KEY old_id (old_id)
+
+) MAX_ROWS=10000000 AVG_ROW_LENGTH=10240;
+
+
 
  $ mysqlimport -u root -p -d -L jawikipedia text.txt  
  $ mysqlimport -u root -p -d -L jawikipedia page.txt  
