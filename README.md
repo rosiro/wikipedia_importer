@@ -18,9 +18,9 @@ $ sudo make install
 
 cat jawiki-latest-pages-articles.xml | sed -e 's/<dbname>.*<\/dbname>//' -e 's/<ns>.*<\/ns>//' -e 's/<parentid>.*<\/parentid>//' -e 's/<sha1>.*<\/sha1>//' -e 's/<model>.*<\/model>//' -e 's/<format>.*<\/format>//' -e 's/<redirect>.*<\/redirect>//' -e 's/<redirect.*\/>//' | xml2sql
 
- $ mysqlimport -u root -p -d -L jawikipedia text.txt
- $ mysqlimport -u root -p -d -L jawikipedia page.txt
- $ mysqlimport -u root -p -d -L jawikipedia revision.txt
+ $ mysqlimport -u root -p -d -L jawikipedia text.txt  
+ $ mysqlimport -u root -p -d -L jawikipedia page.txt  
+ $ mysqlimport -u root -p -d -L jawikipedia revision.txt  
 
 # 以下個別に欲しい場合のみ
 
