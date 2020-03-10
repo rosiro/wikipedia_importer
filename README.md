@@ -108,10 +108,3 @@ curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-page_restriction
 #### ページ間のリンク情報
 curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pagelinks.sql.gz  
 
-
-# import mysql
-mysql> create database jawikipedia;
-
-$ mysql -u root jawikipedia < jawiki-latest-page.sql
-$ mysql -u root jawikipedia < jawiki-latest-pagelinks.sql
-$ mysql -u root jawikipedia < jawiki-latest-categorylinks.sql
