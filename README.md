@@ -6,7 +6,8 @@ https://dumps.wikimedia.org/jawiki/latest/
 
 
 # Wikipediaの記事データの最新ファイル
-curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pages-articles.xml.bz2
+curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pages-articles.xml.bz2  
+bzip2 -d jawiki-latest-pages-articles.xml.bz2  
 
 # 以下個別に欲しい場合のみ
 
