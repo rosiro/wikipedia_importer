@@ -18,6 +18,7 @@ $ sudo make install
 
 cat jawiki-latest-pages-articles.xml | sed -e 's/<dbname>.*<\/dbname>//' -e 's/<ns>.*<\/ns>//' -e 's/<parentid>.*<\/parentid>//' -e 's/<sha1>.*<\/sha1>//' -e 's/<model>.*<\/model>//' -e 's/<format>.*<\/format>//' -e 's/<redirect>.*<\/redirect>//' -e 's/<redirect.*\/>//' | xml2sql
  
+ ```
  CREATE TABLE page (
   page_id int unsigned NOT NULL auto_increment,
   page_namespace int NOT NULL,
@@ -69,7 +70,7 @@ CREATE TABLE text (
   PRIMARY KEY old_id (old_id)
 
 ) MAX_ROWS=10000000 AVG_ROW_LENGTH=10240;
-
+```
 
 
  $ mysqlimport -u root -p -d -L jawikipedia text.txt  
