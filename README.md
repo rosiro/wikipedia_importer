@@ -76,6 +76,7 @@ CREATE TABLE text (
  $ mysqlimport -u root -p -d -L jawikipedia text.txt  
  $ mysqlimport -u root -p -d -L jawikipedia page.txt  
  $ mysqlimport -u root -p -d -L jawikipedia revision.txt  
+ $ mysql -u root -p DATABASE < jawiki-latest-categorylinks.sql  
 
 # 以下個別に欲しい場合のみ
 
