@@ -9,6 +9,17 @@ https://dumps.wikimedia.org/jawiki/latest/
 curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pages-articles.xml.bz2  
 bzip2 -d jawiki-latest-pages-articles.xml.bz2  
 
+# xml2sqlをインストール
+$ git clone https://github.com/Tietew/mediawiki-xml2sql.git  
+$ cd mediawiki-xml2sql  
+$ ./configure  
+$ make  
+$ sudo make install  
+
+cat jawiki-latest-pages-articles.xml | sed -e 's/<dbname>.*<\/dbname>//' -e 's/<ns>.*<\/ns>//' -e 's/<parentid>.*<\/parentid>//' -e 's/<sha1>.*<\/sha1>//' -e 's/<model>.*<\/model>//' -e 's/<format>.*<\/format>//' -e 's/<redirect>.*<\/redirect>//' -e 's/<redirect.*\/>//' | xml2sql
+
+
+
 # 以下個別に欲しい場合のみ
 
 #### 多言語情報
