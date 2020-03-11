@@ -16,7 +16,9 @@ $ ./configure
 $ make  
 $ sudo make install  
 
+```
 cat jawiki-latest-pages-articles.xml | sed -e 's/<dbname>.*<\/dbname>//' -e 's/<ns>.*<\/ns>//' -e 's/<parentid>.*<\/parentid>//' -e 's/<sha1>.*<\/sha1>//' -e 's/<model>.*<\/model>//' -e 's/<format>.*<\/format>//' -e 's/<redirect>.*<\/redirect>//' -e 's/<redirect.*\/>//' | xml2sql
+```
  
  ```
  CREATE TABLE page (
