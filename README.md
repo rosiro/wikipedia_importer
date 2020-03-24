@@ -79,6 +79,10 @@ CREATE TABLE text (
  $ mysqlimport -u root -p -d -L jawikipedia page.txt  
  $ mysqlimport -u root -p -d -L jawikipedia revision.txt  
  $ mysql -u root -p DATABASE < jawiki-latest-categorylinks.sql  
+ $ curl -O https://dumps.wikimedia.org/jawiki/latest/jawiki-latest-pagelinks.sql.gz  
+ $ gzip -d jawiki-latest-pagelinks.sql.gz  
+ $ mysql -u root -p DATABASE < jawiki-latest-pagelinks.sql  
+
 
 # 以下個別に欲しい場合のみ
 
